@@ -1,4 +1,7 @@
 class EscenaInicial extends Phaser.Scene{
+
+    mazo = []
+
 preload(){
     this.load.spritesheet("baraja","assets/sprites/baraja_2.png",{frameWidth:104,frameHeight:160 })
 }
@@ -33,11 +36,45 @@ preload(){
 
     }
 
+ asignarPalo(fila) {
+    let palo = "";
+  
+    if (fila == 1) {
+        palo = "oro";
+    } else if (fila == 2) {
+        palo = "copas";
+    } else if (fila == 3) {
+        palo = "espadas";
+    } else if (fila == 4) {
+        palo = "bastos";
+      
+    
+    }
+    return palo;
+}
+
+
+
     armar_mazo(){
         let frame=0 // guardo la posicion de la imagen
- 
-        
-    }
+        for(let fila = 1; fila<5; fila++){
+            let palo = this.asignarPalo(fila)
+            for(let columna = 1;columna < 13; columna++){
+                if (columna == 8 || columna == 9){
+                frame += 1;
+                continue;
+                }
+                else {
+                 
+                let carta = {"palo":palo,"fila":fila,"columna":columna,"frame":frame,"valor":columna}
+                this.mazo.push(carta)
+                frame += 1
+
+            } 
+        } //fin for  columna
+    } //fin for fila
+    console.log(this.mazo) 
+}//fin funcion
 
     barajar_mazo(){
        
