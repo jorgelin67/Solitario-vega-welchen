@@ -49,7 +49,7 @@ preload(){
         .setFrame(49)
         .setInteractive()
         .on("pointerdown",() =>{
-            this.SeleccionarCarta(cartasJson);
+            this.SeleccionarCarta(cartasJson);//motrar info de cartas
             
         } )
         if(columna == 8){
