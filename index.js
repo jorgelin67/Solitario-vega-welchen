@@ -6,6 +6,8 @@ class EscenaInicial extends Phaser.Scene{
     matriz_solitario = []
     selecciono = true
     titulo=undefined
+    cartasSeleccionadas = undefined
+    indiceSeleccionada = undefined
 
 
 preload(){
@@ -30,9 +32,23 @@ preload(){
         })
     }
 
-    SeleccionarCarta(carta){
+    SeleccionarCarta(carta, infoCarta){
         console.log(carta)
+        this.cartasSeleccionadas = carta
+        this.indiceSeleccionada = infoCarta.indice
     }
+    clickCarta(carta){
+        console.log(carta)
+        if(carta.valor !=12){
+            if(this.cartasSeleccionadas!=undefined){
+                this.mazo[this.indiceSeleccionada]=carta;
+                this.add.sprite(carta.columna, carta.fila, "baraja").setScale(0.5).setFrame(this.cartasSeleccionadas.frame);
+                this.add.sprite(this.cartasSeleccionadas.pos_x, this.cartasSeleccionadas.pos_y, "baraja").setFrame(carta.frame);
+                this.cartasSeleccionadas=undefined;
+                
+                }
+            }
+        }
 
 
     cargar_matriz_inicial(){
@@ -49,7 +65,7 @@ preload(){
         .setFrame(49)
         .setInteractive()
         .on("pointerdown",() =>{
-            this.SeleccionarCarta(cartasJson);//motrar info de cartas
+            this.clickCarta(cartasJson);//motrar info de cartas
             
         } )
         if(columna == 8){
@@ -120,11 +136,12 @@ preload(){
         let pos_x = 710
         let pos_y = 190
         for (let i = 39; i >= 36; i--) {
+            let info_carta = {"x": pos_x, "y":pos_y, "indice":i}
             let carta = this.mazo[i];
             this.add.sprite(pos_x, pos_y, "baraja").setFrame(carta.frame).setScale(0.5)
                 .setInteractive()
                 .on("pointerdown", () => {
-                    this.SeleccionarCarta(carta);
+                    this.SeleccionarCarta(carta, info_carta);
                 });
             pos_y += 80
         }
