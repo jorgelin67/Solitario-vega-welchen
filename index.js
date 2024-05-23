@@ -35,7 +35,7 @@ preload(){
     SeleccionarCarta(carta, infoCarta){
         console.log(carta)
         this.cartasSeleccionadas = carta
-        this.indiceSeleccionada = infoCarta.indice
+        this.indiceSeleccionada = infoCarta.indice//
     }
     clickCarta(carta){
         console.log(carta)
