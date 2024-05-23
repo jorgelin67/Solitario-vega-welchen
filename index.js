@@ -30,7 +30,7 @@ preload(){
         })
     }
 
-    clickCarta(carta){
+    SeleccionarCarta(carta){
         console.log(carta)
     }
 
@@ -49,7 +49,8 @@ preload(){
         .setFrame(49)
         .setInteractive()
         .on("pointerdown",() =>{
-            this.clickCarta(cartasJson);
+            this.SeleccionarCarta(cartasJson);
+            
         } )
         if(columna == 8){
             columna = 0 
@@ -114,12 +115,17 @@ preload(){
 
 
 
-    mostrar_mis_cartas(){
+ 
+    mostrar_mis_cartas() {
         let pos_x = 710
         let pos_y = 190
-        
-        for (let i = 39; i>=36; i--) {
-            this.add.sprite(pos_x, pos_y, "baraja").setFrame(this.mazo[i].frame).setScale(0.5)
+        for (let i = 39; i >= 36; i--) {
+            let carta = this.mazo[i];
+            this.add.sprite(pos_x, pos_y, "baraja").setFrame(carta.frame).setScale(0.5)
+                .setInteractive()
+                .on("pointerdown", () => {
+                    this.SeleccionarCarta(carta);
+                });
             pos_y += 80
         }
     }
